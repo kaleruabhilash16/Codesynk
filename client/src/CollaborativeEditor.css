@@ -1,0 +1,88 @@
+/* CollaborativeEditor.css */
+.editor-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f9fc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .run-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  .run-button:disabled {
+    background-color: #ccc;  /* Disabled button style */
+    cursor: not-allowed;
+  }
+  
+  .run-button:hover {
+    background-color: #45a049;
+  }
+  
+  .loading {
+    text-align: center;
+    margin-top: 10px;
+    color: #888;
+  }
+  
+  .output-container {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .output-title {
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .output {
+    white-space: pre-wrap;
+    color: #000;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  .scanner-input-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .scanner-input-container label {
+    margin-bottom: 5px;
+  }
+  
+  .scanner-input-container input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
