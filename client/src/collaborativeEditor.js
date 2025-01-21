@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Editor } from '@monaco-editor/react';
-import './CollaborativeEditor.css';
-import { debounce } from 'lodash';
+import React, { useState, useEffect } from "react";
+import { Editor } from "@monaco-editor/react";
+import "./CollaborativeEditor.css";
+import { debounce } from "lodash";
 
 const CollaborativeEditor = () => {
-  const [code, setCode] = useState(''); // Holds the code in the editor
-  const [output, setOutput] = useState(''); // Holds the output after execution
+  const [code, setCode] = useState(""); // Holds the code in the editor
+  const [output, setOutput] = useState(""); // Holds the output after execution
   const [loading, setLoading] = useState(false); // Indicates if the code is being compiled/executed
   const [socket, setSocket] = useState(null); // WebSocket connection
-  const [scannerInput, setScannerInput] = useState(''); // Holds input for Scanner
+  const [scannerInput, setScannerInput] = useState(""); // Holds input for Scanner
   const [showScannerInput, setShowScannerInput] = useState(false); // Controls visibility of Scanner input field
 
   useEffect(() => {
     // Create WebSocket connection using secure wss://
-    const ws = new WebSocket('ws://localhost:8082');
- // Update this with your server's URL
+    const ws = new WebSocket("wss://codesynk.onrender.com");
+    // Update this with your server's URL
     setSocket(ws);
 
     ws.onmessage = (event) => {
@@ -35,15 +35,15 @@ const CollaborativeEditor = () => {
   const handleEditorChange = debounce((newValue) => {
     setCode(newValue);
     // Show or hide Scanner input field based on the code
-    if (newValue.includes('Scanner')) {
+    if (newValue.includes("Scanner")) {
       setShowScannerInput(true);
     } else {
       setShowScannerInput(false);
     }
-    
+
     // Send updated code to the server
     if (socket) {
-      socket.send(JSON.stringify({ code: newValue, action: 'updateCode' }));
+      socket.send(JSON.stringify({ code: newValue, action: "updateCode" }));
     }
   }, 300);
 
@@ -52,7 +52,9 @@ const CollaborativeEditor = () => {
     if (socket) {
       setLoading(true);
       // Include Scanner input in the execution request
-      socket.send(JSON.stringify({ code, scannerInput, action: 'executeCode' }));
+      socket.send(
+        JSON.stringify({ code, scannerInput, action: "executeCode" })
+      );
     }
   };
 
@@ -63,7 +65,9 @@ const CollaborativeEditor = () => {
 
   return (
     <div className="editor-container">
-      <h2 className="title">Collaborative Java Compiler/Editor with Autocomplete</h2>
+      <h2 className="title">
+        Collaborative Java Compiler/Editor with Autocomplete
+      </h2>
       <Editor
         height="400px"
         language="java"
@@ -76,7 +80,7 @@ const CollaborativeEditor = () => {
           wordWrap: "on",
           suggestOnTriggerCharacters: true,
           quickSuggestions: true,
-          snippetSuggestions: 'top',
+          snippetSuggestions: "top",
         }}
       />
       {showScannerInput && (
@@ -91,8 +95,12 @@ const CollaborativeEditor = () => {
           />
         </div>
       )}
-      <button className="run-button" onClick={handleExecuteCode} disabled={loading}>
-        {loading ? 'Compiling...' : 'Run Code'}
+      <button
+        className="run-button"
+        onClick={handleExecuteCode}
+        disabled={loading}
+      >
+        {loading ? "Compiling..." : "Run Code"}
       </button>
       {loading && <div className="loading">Compiling... Please wait</div>}
       <div className="output-container">
